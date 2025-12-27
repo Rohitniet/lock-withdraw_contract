@@ -1,39 +1,130 @@
-# <h1 align="center"> Forge Template </h1>
+<h1>🔒 Lock–Withdraw ERC20 Smart Contract</h1>
 
-**Template repository for getting started quickly with Foundry projects**
+<p>
+A simple Ethereum smart contract system written in Solidity that allows users to
+<b>deposit (lock)</b> and <b>withdraw</b> ERC20 tokens.
+This project demonstrates core Solidity and ERC20 interaction concepts and is suitable
+as an <b>internship / learning project</b>.
+</p>
 
-![Github Actions](https://github.com/foundry-rs/forge-template/workflows/CI/badge.svg)
+<hr/>
 
-## Getting Started
+<h2>📌 Overview</h2>
 
-Click "Use this template" on [GitHub](https://github.com/foundry-rs/forge-template) to create a new repository with this repo as the initial state.
+<ul>
+  <li><b>Newt.sol</b> – Custom mintable ERC20 token</li>
+  <li><b>lock.sol</b> – Lock & withdraw contract</li>
+  <li><b>TestContract.sol</b> – Foundry test cases</li>
+</ul>
 
-Or, if your repo already exists, run:
-```sh
-forge init
-forge build
+<p>
+The lock contract uses the ERC20 <code>approve</code> and <code>transferFrom</code> pattern
+to safely move tokens from users into the contract.
+</p>
+
+<hr/>
+
+<h2>🚀 Features</h2>
+
+<ul>
+  <li>ERC20 token deposit (lock)</li>
+  <li>User-specific balance tracking</li>
+  <li>Total locked token tracking</li>
+  <li>ERC20 allowance verification</li>
+  <li>Withdraw deposited tokens</li>
+  <li>Tested using Foundry</li>
+</ul>
+
+<hr/>
+
+<h2>📁 Project Structure</h2>
+
+<pre>
+lock-withdraw_contract/
+├── src/
+│   ├── Newt.sol
+│   └── lock.sol
+├── test/
+│   └── TestContract.sol
+├── foundry.toml
+└── README.md
+</pre>
+
+<hr/>
+
+<h2>⚙️ How It Works</h2>
+
+<h3>1️⃣ Deploy ERC20 Token</h3>
+
+<pre>
+Newt token = new Newt("pip", "pt");
+</pre>
+
+<h3>2️⃣ Deploy Lock Contract</h3>
+
+<pre>
+lock locker = new lock(address(token));
+</pre>
+
+<h3>3️⃣ Deposit Tokens</h3>
+
+<p>User must approve the lock contract before depositing.</p>
+
+<pre>
+token.approve(address(locker), amount);
+locker.deposite(amount);
+</pre>
+
+<h3>4️⃣ Withdraw Tokens</h3>
+
+<pre>
+locker.withdraw();
+</pre>
+
+<p>
+Tokens are transferred back to the caller based on their deposited balance.
+</p>
+
+<hr/>
+
+<h2>🧪 Running Tests</h2>
+
+<p>This project uses <b>Foundry</b> for testing.</p>
+
+<pre>
 forge test
-```
+</pre>
 
-## Writing your first test
+<p>
+Tests cover:
+</p>
 
-All you need is to `import forge-std/Test.sol` and then inherit it from your test contract. Forge-std's Test contract comes with a pre-instatiated [cheatcodes environment](https://book.getfoundry.sh/cheatcodes/), the `vm`. It also has support for [ds-test](https://book.getfoundry.sh/reference/ds-test.html)-style logs and assertions. Finally, it supports Hardhat's [console.log](https://github.com/brockelmore/forge-std/blob/master/src/console.sol). The logging functionalities require `-vvvv`.
+<ul>
+  <li>Token minting</li>
+  <li>Approval and deposit flow</li>
+  <li>Withdraw functionality</li>
+</ul>
 
-```solidity
-pragma solidity 0.8.10;
+<hr/>
 
-import "forge-std/Test.sol";
+<h2>🧠 Learning Outcomes</h2>
 
-contract ContractTest is Test {
-    function testExample() public {
-        vm.roll(100);
-        console.log(1);
-        emit log("hi");
-        assertTrue(true);
-    }
-}
-```
+<ul>
+  <li>Understanding ERC20 approve & transferFrom</li>
+  <li>Smart contract state management</li>
+  <li>Foundry-based Solidity testing</li>
+  <li>Basic lock–withdraw contract design</li>
+</ul>
 
-## Development
+<hr/>
 
-This project uses [Foundry](https://getfoundry.sh). See the [book](https://book.getfoundry.sh/getting-started/installation.html) for instructions on how to install and use Foundry.
+<h2>⚠️ Security Notes</h2>
+
+<p>
+This project is for <b>learning purposes</b>.
+It does not include advanced security features such as:
+</p>
+
+<ul>
+  <li>Reentrancy protection</li>
+  <li>Admin-controlled
