@@ -45,7 +45,7 @@ lock-withdraw_contract/
 │   ├── Newt.sol
 │   └── lock.sol
 ├── test/
-│   └── TestContract.sol
+│   └── Newt.t.sol
 ├── foundry.toml
 └── README.md
 </pre>
